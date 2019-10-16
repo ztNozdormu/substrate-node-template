@@ -2166,6 +2166,7 @@ dependencies = [
  "substrate-primitives 2.0.0 (git+https://github.com/paritytech/substrate.git?rev=3dedd246c62255ba6f9b777ecba318dfc2078d85)",
  "substrate-session 2.0.0 (git+https://github.com/paritytech/substrate.git?rev=3dedd246c62255ba6f9b777ecba318dfc2078d85)",
  "substrate-wasm-builder-runner 1.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "tictactoe 0.1.0 (git+https://github.com/JoshOrndorff/tictactoe.git?rev=2ce811252e15959794da21b679ed3cd337cb2dc5)",
 ]
 
 [[package]]
@@ -4522,6 +4523,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "tictactoe"
+version = "0.1.0"
+source = "git+https://github.com/JoshOrndorff/tictactoe.git?rev=2ce811252e15959794da21b679ed3cd337cb2dc5#2ce811252e15959794da21b679ed3cd337cb2dc5"
+dependencies = [
+ "parity-scale-codec 1.0.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "serde 1.0.101 (registry+https://github.com/rust-lang/crates.io-index)",
+ "sr-io 2.0.0 (git+https://github.com/paritytech/substrate.git?rev=3dedd246c62255ba6f9b777ecba318dfc2078d85)",
+ "sr-primitives 2.0.0 (git+https://github.com/paritytech/substrate.git?rev=3dedd246c62255ba6f9b777ecba318dfc2078d85)",
+ "sr-std 2.0.0 (git+https://github.com/paritytech/substrate.git?rev=3dedd246c62255ba6f9b777ecba318dfc2078d85)",
+ "srml-support 2.0.0 (git+https://github.com/paritytech/substrate.git?rev=3dedd246c62255ba6f9b777ecba318dfc2078d85)",
+ "srml-system 2.0.0 (git+https://github.com/paritytech/substrate.git?rev=3dedd246c62255ba6f9b777ecba318dfc2078d85)",
+]
+
+[[package]]
 name = "time"
 version = "0.1.42"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5656,6 +5671,7 @@ dependencies = [
 "checksum termcolor 1.0.5 (registry+https://github.com/rust-lang/crates.io-index)" = "96d6098003bde162e4277c70665bd87c326f5a0c3f3fbfb285787fa482d54e6e"
 "checksum textwrap 0.10.0 (registry+https://github.com/rust-lang/crates.io-index)" = "307686869c93e71f94da64286f9a9524c0f308a9e1c87a583de8e9c9039ad3f6"
 "checksum thread_local 0.3.6 (registry+https://github.com/rust-lang/crates.io-index)" = "c6b53e329000edc2b34dbe8545fd20e55a333362d0a321909685a19bd28c3f1b"
+"checksum tictactoe 0.1.0 (git+https://github.com/JoshOrndorff/tictactoe.git?rev=2ce811252e15959794da21b679ed3cd337cb2dc5)" = "<none>"
 "checksum time 0.1.42 (registry+https://github.com/rust-lang/crates.io-index)" = "db8dcfca086c1143c9270ac42a2bbd8a7ee477b78ac8e45b19abfb0cbede4b6f"
 "checksum tiny-bip39 0.6.2 (registry+https://github.com/rust-lang/crates.io-index)" = "c1c5676413eaeb1ea35300a0224416f57abc3bd251657e0fafc12c47ff98c060"
 "checksum tiny-keccak 1.5.0 (registry+https://github.com/rust-lang/crates.io-index)" = "1d8a021c69bb74a44ccedb824a046447e2c84a01df9e5c20779750acb38e11b2"

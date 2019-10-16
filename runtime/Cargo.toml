@@ -113,6 +113,12 @@ git = 'https://github.com/paritytech/substrate.git'
 package = 'srml-timestamp'
 rev = '3dedd246c62255ba6f9b777ecba318dfc2078d85'
 
+[dependencies.tictactoe]
+default_features = false
+git = 'https://github.com/JoshOrndorff/tictactoe.git'
+package = 'tictactoe'
+rev = '2ce811252e15959794da21b679ed3cd337cb2dc5'
+
 [dependencies.version]
 default_features = false
 git = 'https://github.com/paritytech/substrate.git'
@@ -152,4 +158,5 @@ std = [
     'safe-mix/std',
     'offchain-primitives/std',
     'substrate-session/std',
+    'tictactoe/std',
 ]

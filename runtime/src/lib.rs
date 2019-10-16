@@ -94,11 +94,11 @@ pub mod opaque {
 
 /// This runtime version.
 pub const VERSION: RuntimeVersion = RuntimeVersion {
-	spec_name: create_runtime_str!("node-template"),
-	impl_name: create_runtime_str!("node-template"),
-	authoring_version: 3,
-	spec_version: 4,
-	impl_version: 4,
+	spec_name: create_runtime_str!("node-template+tictactoe"),
+	impl_name: create_runtime_str!("node-template+tictactoe"),
+	authoring_version: 4,
+	spec_version: 5,
+	impl_version: 5,
 	apis: RUNTIME_API_VERSIONS,
 };
 
@@ -257,6 +257,10 @@ impl template::Trait for Runtime {
 	type Event = Event;
 }
 
+impl tictactoe::Trait for Runtime {
+	type Event = Event;
+}
+
 construct_runtime!(
 	pub enum Runtime where
 		Block = Block,
@@ -272,6 +276,7 @@ construct_runtime!(
 		Sudo: sudo,
 		// Used for the module template in `./template.rs`
 		TemplateModule: template::{Module, Call, Storage, Event<T>},
+		TicTacToe: tictactoe::{Module, Call, Storage, Event<T>},
 	}
 );
 
