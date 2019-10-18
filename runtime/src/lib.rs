@@ -96,9 +96,9 @@ pub mod opaque {
 pub const VERSION: RuntimeVersion = RuntimeVersion {
 	spec_name: create_runtime_str!("node-template+tictactoe"),
 	impl_name: create_runtime_str!("node-template+tictactoe"),
-	authoring_version: 4,
-	spec_version: 5,
-	impl_version: 5,
+	authoring_version: 5,
+	spec_version: 6,
+	impl_version: 6,
 	apis: RUNTIME_API_VERSIONS,
 };
 
@@ -247,11 +247,6 @@ impl balances::Trait for Runtime {
 	type WeightToFee = ConvertInto;
 }
 
-impl sudo::Trait for Runtime {
-	type Event = Event;
-	type Proposal = Call;
-}
-
 /// Used for the module template in `./template.rs`
 impl template::Trait for Runtime {
 	type Event = Event;
@@ -273,7 +268,6 @@ construct_runtime!(
 		Grandpa: grandpa::{Module, Call, Storage, Config, Event},
 		Indices: indices::{default, Config<T>},
 		Balances: balances::{default, Error},
-		Sudo: sudo,
 		// Used for the module template in `./template.rs`
 		TemplateModule: template::{Module, Call, Storage, Event<T>},
 		TicTacToe: tictactoe::{Module, Call, Storage, Event<T>},

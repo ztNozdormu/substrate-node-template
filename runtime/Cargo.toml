@@ -89,12 +89,6 @@ default-features = false
 git = 'https://github.com/paritytech/substrate.git'
 rev = '3dedd246c62255ba6f9b777ecba318dfc2078d85'
 
-[dependencies.sudo]
-default_features = false
-git = 'https://github.com/paritytech/substrate.git'
-package = 'srml-sudo'
-rev = '3dedd246c62255ba6f9b777ecba318dfc2078d85'
-
 [dependencies.support]
 default_features = false
 git = 'https://github.com/paritytech/substrate.git'
@@ -152,7 +146,6 @@ std = [
     'sr-primitives/std',
     'system/std',
     'timestamp/std',
-    'sudo/std',
     'version/std',
     'serde',
     'safe-mix/std',
