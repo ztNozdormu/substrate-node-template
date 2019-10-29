@@ -33,7 +33,13 @@ std = [
     'safe-mix/std',
     'offchain-primitives/std',
     'substrate-session/std',
+    'pcalc-module/std',
 ]
+
+[dependencies.pcalc-module]
+default_features = false
+path = "../../pcalc/module"
+
 [dependencies.aura]
 default_features = false
 git = 'https://github.com/paritytech/substrate.git'
@@ -49,7 +55,7 @@ rev = 'd1cd01c74e8d5550396cb654f9a3f1b641efdf4c'
 [dependencies.balances]
 default_features = false
 git = 'https://github.com/paritytech/substrate.git'
-package = 'srml-balances'
+package = 'srml-generic-asset'
 rev = 'd1cd01c74e8d5550396cb654f9a3f1b641efdf4c'
 
 [dependencies.client]

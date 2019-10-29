@@ -20,6 +20,7 @@ use client::{
 	block_builder::api::{CheckInherentsResult, InherentData, self as block_builder_api},
 	runtime_api as client_api, impl_runtime_apis
 };
+use balances::SpendingAssetCurrency;
 use aura_primitives::sr25519::AuthorityId as AuraId;
 use grandpa::{AuthorityId as GrandpaId, AuthorityWeight as GrandpaWeight};
 use grandpa::fg_primitives;
@@ -179,7 +180,7 @@ impl indices::Trait for Runtime {
 	/// Use the standard means of resolving an index hint from an id.
 	type ResolveHint = indices::SimpleResolveHint<Self::AccountId, Self::AccountIndex>;
 	/// Determine whether an account is dead.
-	type IsDeadAccount = Balances;
+	type IsDeadAccount = ();
 	/// The ubiquitous event type.
 	type Event = Event;
 }
@@ -195,35 +196,42 @@ impl timestamp::Trait for Runtime {
 	type MinimumPeriod = MinimumPeriod;
 }
 
-parameter_types! {
-	pub const ExistentialDeposit: u128 = 500;
-	pub const TransferFee: u128 = 0;
-	pub const CreationFee: u128 = 0;
-}
+// parameter_types! {
+// 	pub const ExistentialDeposit: u128 = 500;
+// 	pub const TransferFee: u128 = 0;
+// 	pub const CreationFee: u128 = 0;
+// }
+//
+// impl balances::Trait for Runtime {
+// 	/// The type for recording an account's balance.
+// 	type Balance = Balance;
+// 	/// What to do if an account's free balance gets zeroed.
+// 	type OnFreeBalanceZero = ();
+// 	/// What to do if a new account is created.
+// 	type OnNewAccount = Indices;
+// 	/// The ubiquitous event type.
+// 	type Event = Event;
+// 	type DustRemoval = ();
+// 	type TransferPayment = ();
+// 	type ExistentialDeposit = ExistentialDeposit;
+// 	type TransferFee = TransferFee;
+// 	type CreationFee = CreationFee;
+// }
 
 impl balances::Trait for Runtime {
-	/// The type for recording an account's balance.
 	type Balance = Balance;
-	/// What to do if an account's free balance gets zeroed.
-	type OnFreeBalanceZero = ();
-	/// What to do if a new account is created.
-	type OnNewAccount = Indices;
-	/// The ubiquitous event type.
+	type AssetId = u32;
 	type Event = Event;
-	type DustRemoval = ();
-	type TransferPayment = ();
-	type ExistentialDeposit = ExistentialDeposit;
-	type TransferFee = TransferFee;
-	type CreationFee = CreationFee;
 }
 
 parameter_types! {
 	pub const TransactionBaseFee: Balance = 0;
 	pub const TransactionByteFee: Balance = 1;
+	pub const FeeAssetId: u32 = 0;
 }
 
 impl transaction_payment::Trait for Runtime {
-	type Currency = balances::Module<Runtime>;
+	type Currency = SpendingAssetCurrency<Self>; //Self == Module<Runtime> ?
 	type OnTransactionPayment = ();
 	type TransactionBaseFee = TransactionBaseFee;
 	type TransactionByteFee = TransactionByteFee;
@@ -346,7 +354,7 @@ impl_runtime_apis! {
 		fn slot_duration() -> u64 {
 			Aura::slot_duration()
 		}
-		
+
 		fn authorities() -> Vec<AuraId> {
 			Aura::authorities()
 		}
