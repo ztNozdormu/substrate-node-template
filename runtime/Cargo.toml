@@ -33,12 +33,7 @@ std = [
     'safe-mix/std',
     'offchain-primitives/std',
     'substrate-session/std',
-    'pcalc-module/std',
 ]
-
-[dependencies.pcalc-module]
-default_features = false
-path = "../../pcalc/module"
 
 [dependencies.aura]
 default_features = false
