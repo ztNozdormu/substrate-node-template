@@ -1,6 +1,6 @@
 use sp_core::{Pair, Public, sr25519};
 use node_template_runtime::{
-	AccountId, AuraConfig, BalancesConfig, GenesisConfig, GrandpaConfig,
+	AccountId, AuraConfig, GenericAssetConfig, GenesisConfig, GrandpaConfig, BalancesConfig,
 	SudoConfig, IndicesConfig, SystemConfig, WASM_BINARY, Signature
 };
 use sp_consensus_aura::sr25519::{AuthorityId as AuraId};
@@ -127,6 +127,10 @@ fn testnet_genesis(initial_authorities: Vec<(AuraId, GrandpaId)>,
 			ids: endowed_accounts.clone(),
 		}),
 		balances: Some(BalancesConfig {
+			balances: vec![],
+			vesting: vec![],
+		}),
+		generic_asset: Some(GenericAssetConfig {
 			assets: vec![
 				16000,
 				16001,

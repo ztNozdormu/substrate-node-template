@@ -30,7 +30,7 @@ use sp_version::NativeVersion;
 #[cfg(any(feature = "std", test))]
 pub use sp_runtime::BuildStorage;
 pub use timestamp::Call as TimestampCall;
-pub use generic_asset::Call as AssetsCall;
+pub use generic_asset::Call as AssetCall;
 pub use sp_runtime::{Permill, Perbill};
 pub use frame_support::{
 	StorageValue, construct_runtime, parameter_types,
@@ -195,27 +195,27 @@ impl timestamp::Trait for Runtime {
 	type MinimumPeriod = MinimumPeriod;
 }
 
-// parameter_types! {
-// 	pub const ExistentialDeposit: u128 = 500;
-// 	pub const TransferFee: u128 = 0;
-// 	pub const CreationFee: u128 = 0;
-// }
-//
-// impl balances::Trait for Runtime {
-// 	/// The type for recording an account's balance.
-// 	type Balance = Balance;
-// 	/// What to do if an account's free balance gets zeroed.
-// 	type OnFreeBalanceZero = ();
-// 	/// What to do if a new account is created.
-// 	type OnNewAccount = Indices;
-// 	/// The ubiquitous event type.
-// 	type Event = Event;
-// 	type DustRemoval = ();
-// 	type TransferPayment = ();
-// 	type ExistentialDeposit = ExistentialDeposit;
-// 	type TransferFee = TransferFee;
-// 	type CreationFee = CreationFee;
-// }
+parameter_types! {
+	pub const ExistentialDeposit: u128 = 0;
+	pub const TransferFee: u128 = 0;
+	pub const CreationFee: u128 = 0;
+}
+
+impl balances::Trait for Runtime {
+	/// The type for recording an account's balance.
+	type Balance = Balance;
+	/// What to do if an account's free balance gets zeroed.
+	type OnFreeBalanceZero = ();
+	/// What to do if a new account is created.
+	type OnNewAccount = Indices;
+	/// The ubiquitous event type.
+	type Event = Event;
+	type DustRemoval = ();
+	type TransferPayment = ();
+	type ExistentialDeposit = ExistentialDeposit;
+	type TransferFee = TransferFee;
+	type CreationFee = CreationFee;
+}
 
 impl generic_asset::Trait for Runtime {
 	type Balance = Balance;
@@ -223,10 +223,16 @@ impl generic_asset::Trait for Runtime {
 	type Event = Event;
 }
 
+impl assets::Trait for Runtime {
+	type Balance = Balance;
+	type AssetId = u32;
+	type Event = Event;
+}
+
 parameter_types! {
-	pub const TransactionBaseFee: Balance = 0;
-	pub const TransactionByteFee: Balance = 1;
-	pub const FeeAssetId: u32 = 0;
+	pub const TransactionBaseFee: Balance = 10;
+	pub const TransactionByteFee: Balance = 10;
+	// pub const FeeAssetId: u32 = 0;
 }
 
 impl transaction_payment::Trait for Runtime {
@@ -257,9 +263,11 @@ construct_runtime!(
 		System: system::{Module, Call, Storage, Config, Event},
 		Timestamp: timestamp::{Module, Call, Storage, Inherent},
 		Aura: aura::{Module, Config<T>, Inherent(Timestamp)},
+		Assets: assets::{Module, Call, Storage, Event<T>},
 		Grandpa: grandpa::{Module, Call, Storage, Config, Event},
 		Indices: indices,
 		GenericAsset: generic_asset,
+		Balances: balances,
 		TransactionPayment: transaction_payment::{Module, Storage},
 		Sudo: sudo,
 		// Used for the module template in `./template.rs`
