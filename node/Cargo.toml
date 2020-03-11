@@ -24,6 +24,14 @@ name = 'node-template'
 futures = '0.3.1'
 log = '0.4.8'
 structopt = '0.3.8'
+sc-consensus-pow = { git = "https://github.com/paritytech/substrate", rev = '013c1ee167354a08283fb69915fda56a62fee943' }
+sp-consensus-pow = { git = "https://github.com/paritytech/substrate", rev = '013c1ee167354a08283fb69915fda56a62fee943' }
+sc-client-api = { git = "https://github.com/paritytech/substrate", rev = '013c1ee167354a08283fb69915fda56a62fee943' }
+sp-blockchain = { git = "https://github.com/paritytech/substrate", rev = '013c1ee167354a08283fb69915fda56a62fee943' }
+parity-scale-codec = '1.0.0'
+sha3 = "0.8"
+rand = { version = "0.7", features = ["small_rng"] }
+
 
 [dependencies.grandpa]
 git = 'https://github.com/paritytech/substrate.git'
@@ -44,7 +52,6 @@ version = '2.0.0-alpha.3'
 [dependencies.sc-basic-authorship]
 git = 'https://github.com/paritytech/substrate.git'
 rev = '013c1ee167354a08283fb69915fda56a62fee943'
-version = '0.8.0-alpha.3'
 
 [dependencies.sc-cli]
 git = 'https://github.com/paritytech/substrate.git'
