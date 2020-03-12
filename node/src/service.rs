@@ -46,9 +46,20 @@ macro_rules! new_full_start {
 				let pool_api = sc_transaction_pool::FullChainApi::new(client.clone());
 				Ok(sc_transaction_pool::BasicPool::new(config, std::sync::Arc::new(pool_api)))
 			})?
-			.with_import_queue(|_config, client, _select_chain, _transaction_pool| {
+			.with_import_queue(|_config, client, select_chain, _transaction_pool| {
+
+				//TODO dupe these changes to the light client
+				let pow_block_import = sc_consensus_pow::PowBlockImport::new(
+					client.clone(),
+					client.clone(),
+					crate::pow::Sha3Algorithm,
+					0, // check_inherents_after,
+					select_chain,
+					inherent_data_providers.clone(),
+				);
+
 				let import_queue = sc_consensus_pow::import_queue(
-					Box::new(client.clone()),
+					Box::new(pow_block_import),
 					crate::pow::Sha3Algorithm,
 					inherent_data_providers.clone(),
 				)?;
