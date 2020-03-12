@@ -17,13 +17,24 @@ native_executor_instance!(
 	node_template_runtime::native_version,
 );
 
+pub fn build_inherent_data_providers() -> Result<InherentDataProviders, ServiceError> {
+	let providers = InherentDataProviders::new();
+
+	providers
+		.register_provider(sp_timestamp::InherentDataProvider)
+		.map_err(Into::into)
+		.map_err(sp_consensus::error::Error::InherentData)?;
+
+	Ok(providers)
+}
+
 /// Starts a `ServiceBuilder` for a full service.
 ///
 /// Use this macro if you don't actually need the full service, but just the builder in order to
 /// be able to perform chain operations.
 macro_rules! new_full_start {
 	($config:expr) => {{
-		let inherent_data_providers = sp_inherents::InherentDataProviders::new();
+		let inherent_data_providers = crate::service::build_inherent_data_providers()?;
 
 		let builder = sc_service::ServiceBuilder::new_full::<
 			node_template_runtime::opaque::Block, node_template_runtime::RuntimeApi, crate::service::Executor
@@ -120,8 +131,6 @@ pub fn new_full(config: Configuration<GenesisConfig>)
 pub fn new_light(config: Configuration<GenesisConfig>)
 	-> Result<impl AbstractService, ServiceError>
 {
-	let inherent_data_providers = InherentDataProviders::new();
-
 	ServiceBuilder::new_light::<Block, RuntimeApi, Executor>(config)?
 		.with_select_chain(|_config, backend| {
 			Ok(LongestChain::new(backend.clone()))
@@ -143,7 +152,7 @@ pub fn new_light(config: Configuration<GenesisConfig>)
 			let import_queue = sc_consensus_pow::import_queue(
 				Box::new(client.clone()),
 				Sha3Algorithm,
-				inherent_data_providers.clone(),
+				build_inherent_data_providers()?,
 			)?;
 
 			Ok((import_queue, finality_proof_request_builder))

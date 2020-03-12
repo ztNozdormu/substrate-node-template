@@ -2345,6 +2345,7 @@ dependencies = [
  "sp-finality-grandpa 2.0.0-alpha.3 (git+https://github.com/paritytech/substrate.git?rev=013c1ee167354a08283fb69915fda56a62fee943)",
  "sp-inherents 2.0.0-alpha.3 (git+https://github.com/paritytech/substrate.git?rev=013c1ee167354a08283fb69915fda56a62fee943)",
  "sp-runtime 2.0.0-alpha.3 (git+https://github.com/paritytech/substrate.git?rev=013c1ee167354a08283fb69915fda56a62fee943)",
+ "sp-timestamp 2.0.0-alpha.3 (git+https://github.com/paritytech/substrate.git?rev=013c1ee167354a08283fb69915fda56a62fee943)",
  "sp-transaction-pool 2.0.0-alpha.3 (git+https://github.com/paritytech/substrate.git?rev=013c1ee167354a08283fb69915fda56a62fee943)",
  "structopt 0.3.11 (registry+https://github.com/rust-lang/crates.io-index)",
  "substrate-build-script-utils 2.0.0-alpha.3 (git+https://github.com/paritytech/substrate.git?rev=013c1ee167354a08283fb69915fda56a62fee943)",
