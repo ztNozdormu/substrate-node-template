@@ -48,7 +48,6 @@ macro_rules! new_full_start {
 			})?
 			.with_import_queue(|_config, client, select_chain, _transaction_pool| {
 
-				//TODO dupe these changes to the light client
 				let pow_block_import = sc_consensus_pow::PowBlockImport::new(
 					client.clone(),
 					client.clone(),
@@ -75,7 +74,6 @@ pub fn new_full(config: Configuration<GenesisConfig>)
 	-> Result<impl AbstractService, ServiceError>
 {
 	let is_authority = config.roles.is_authority();
-	let force_authoring = config.force_authoring;
 
 	// sentry nodes announce themselves as authorities to the network
 	// and should run the same protocols authorities do, but it should
@@ -83,10 +81,6 @@ pub fn new_full(config: Configuration<GenesisConfig>)
 	let participates_in_consensus = is_authority && !config.sentry_mode;
 
 	let (builder, inherent_data_providers) = new_full_start!(config);
-
-	// let (block_import, grandpa_link) =
-	// 	import_setup.take()
-	// 		.expect("Link Half and Block Import are present for Full Services or setup failed before. qed");
 
 	let service = builder
 		// Question. Why bother giving () as a finality proof provider when I can just
