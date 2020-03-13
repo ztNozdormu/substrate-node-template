@@ -34,6 +34,7 @@ pub fn build_inherent_data_providers() -> Result<InherentDataProviders, ServiceE
 /// be able to perform chain operations.
 macro_rules! new_full_start {
 	($config:expr) => {{
+		let mut import_setup = None;
 		let inherent_data_providers = crate::service::build_inherent_data_providers()?;
 
 		let builder = sc_service::ServiceBuilder::new_full::<
@@ -58,14 +59,17 @@ macro_rules! new_full_start {
 				);
 
 				let import_queue = sc_consensus_pow::import_queue(
-					Box::new(pow_block_import),
+					Box::new(pow_block_import.clone()),
 					crate::pow::Sha3Algorithm,
 					inherent_data_providers.clone(),
 				)?;
+
+				import_setup = Some(pow_block_import);
+
 				Ok(import_queue)
 			})?;
 
-		(builder, inherent_data_providers)
+		(builder, import_setup, inherent_data_providers)
 	}}
 }
 
@@ -80,7 +84,9 @@ pub fn new_full(config: Configuration<GenesisConfig>)
 	// never actively participate in any consensus process.
 	let participates_in_consensus = is_authority && !config.sentry_mode;
 
-	let (builder, inherent_data_providers) = new_full_start!(config);
+	let (builder, mut import_setup, inherent_data_providers) = new_full_start!(config);
+	let block_import = import_setup.take()
+		.expect("Block Import is present for Full Services or setup failed before. qed");
 
 	let service = builder
 		// Question. Why bother giving () as a finality proof provider when I can just
@@ -107,7 +113,7 @@ pub fn new_full(config: Configuration<GenesisConfig>)
 			sp_consensus::CanAuthorWithNativeVersion::new(service.client().executor().clone());
 
 		sc_consensus_pow::start_mine(
-			Box::new(service.client().clone()),
+			Box::new(block_import),
 			service.client(),
 			Sha3Algorithm,
 			proposer,
