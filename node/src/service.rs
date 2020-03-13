@@ -105,35 +105,27 @@ pub fn new_full(config: Configuration<GenesisConfig>)
 		// The number of rounds of mining to try in a single call
 		let rounds = 500;
 
-		// let client = service.client();
-		// let select_chain = service.select_chain()
-		// 	.ok_or(ServiceError::SelectChainRequired)?;
+		let client = service.client();
+		let select_chain = service.select_chain()
+			.ok_or(ServiceError::SelectChainRequired)?;
 
 		let can_author_with =
 			sp_consensus::CanAuthorWithNativeVersion::new(service.client().executor().clone());
 
 		sc_consensus_pow::start_mine(
 			Box::new(block_import),
-			service.client(),
+			client,
 			Sha3Algorithm,
 			proposer,
-			None,
+			None, // No preruntime digests
 			rounds,
 			service.network(),
 			std::time::Duration::new(2, 0),
-			service.select_chain().map(|v| v.clone()),
+			Some(select_chain),
 			inherent_data_providers.clone(),
 			can_author_with,
 		);
 	}
-
-	// if the node isn't actively participating in consensus then it doesn't
-	// need a keystore, regardless of which protocol we use below.
-	// let keystore = if participates_in_consensus {
-	// 	Some(service.keystore())
-	// } else {
-	// 	None
-	// };
 
 	Ok(service)
 }
