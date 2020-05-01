@@ -7,6 +7,25 @@ A new Substrate node, ready for hacking. This node includes:
 * Aura block authoring
 * Grandpa finality gadget
 
+## Version
+
+You are on the `master` branch of this repository! In general, the only reason to checkout and work
+with this branch is if you are making changes to the Substrate Node Template itself. If you are
+using the code in this repository to follow a tutorial or some other type of guide, you should
+checkout one of the tagged versions of this repository that corresponds with a tagged version of
+the Substrate codebase itself. Because Substrate is such a fast-moving project that is likely to
+undergo many breaking changes, the Substrate team takes great pains to release compatible versions
+of related codebases as close to simultaneously as possible. This helps ensure a positive
+experience for Substrate developers and also reduces the support overhead on the Substrate team.
+Please always be sure that you are using specific, compatible versions of the components in your
+Substrate development environment. The versions this repository that are currently available are:
+
+- [v2.0.0-alpha.6](https://github.com/substrate-developer-hub/substrate-node-template/tree/v2.0.0-alpha.6)
+- [v2.0.0-alpha.5](https://github.com/substrate-developer-hub/substrate-node-template/tree/v2.0.0-alpha.5)
+- [v2.0.0-alpha.3](https://github.com/substrate-developer-hub/substrate-node-template/tree/v2.0.0-alpha.3)
+- [pre-v2.0-3e65111](https://github.com/substrate-developer-hub/substrate-node-template/tree/pre-v2.0-3e65111)
+- [v1.5.0](https://github.com/substrate-developer-hub/substrate-node-template/tree/v1.5.0)
+
 ## Build
 
 Install Rust:
