@@ -9,10 +9,10 @@ A new Substrate node, ready for hacking. This node includes:
 
 ## Version
 
-You are on the `master` branch of this repository! In general, the only reason to checkout and work
+You are on the `master` branch of this repository! In general, the only reason to check out and work
 with this branch is if you are making changes to the Substrate Node Template itself. If you are
 using the code in this repository to follow a tutorial or some other type of guide, you should
-checkout one of the tagged versions of this repository that corresponds with a tagged version of
+check out one of the tagged versions of this repository that corresponds with a tagged version of
 the Substrate codebase itself. Because Substrate is such a fast-moving project that is likely to
 undergo many breaking changes, the Substrate team takes great pains to release compatible versions
 of related codebases as close to simultaneously as possible. This helps ensure a positive
