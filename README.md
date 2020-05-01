@@ -18,13 +18,8 @@ undergo many breaking changes, the Substrate team takes great pains to release c
 of related codebases as close to simultaneously as possible. This helps ensure a positive
 experience for Substrate developers and also reduces the support overhead on the Substrate team.
 Please always be sure that you are using specific, compatible versions of the components in your
-Substrate development environment. The versions this repository that are currently available are:
-
-- [v2.0.0-alpha.6](https://github.com/substrate-developer-hub/substrate-node-template/tree/v2.0.0-alpha.6)
-- [v2.0.0-alpha.5](https://github.com/substrate-developer-hub/substrate-node-template/tree/v2.0.0-alpha.5)
-- [v2.0.0-alpha.3](https://github.com/substrate-developer-hub/substrate-node-template/tree/v2.0.0-alpha.3)
-- [pre-v2.0-3e65111](https://github.com/substrate-developer-hub/substrate-node-template/tree/pre-v2.0-3e65111)
-- [v1.5.0](https://github.com/substrate-developer-hub/substrate-node-template/tree/v1.5.0)
+Substrate development environment. You can find the list of all the available versions at:
+https://github.com/substrate-developer-hub/substrate-node-template/tags
 
 ## Build
 
